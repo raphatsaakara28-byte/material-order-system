@@ -45,6 +45,9 @@
   .topbar .sub{margin:4px 0 0;font-size:13px;color:#CFE7DA;font-family:'Sarabun',sans-serif;}
   .sync-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;position:relative;z-index:1;gap:8px;}
   .sync-info{font-size:11px;color:#CFE7DA;}
+  .admin-status-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;position:relative;z-index:1;}
+  .admin-status-msg{font-size:11.5px;color:#CFE7DA;font-weight:600;}
+  .admin-status-row .small-link{font-size:11.5px;color:#EAF5EC;background:rgba(255,255,255,0.12);border:none;border-radius:8px;padding:4px 10px;text-decoration:none;cursor:pointer;font-family:'Sarabun',sans-serif;}
   .refresh-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer;font-family:'Sarabun',sans-serif;flex-shrink:0;}
   .refresh-btn:hover{background:rgba(255,255,255,0.28);}
 
@@ -161,6 +164,7 @@
       <span class="sync-info" id="syncInfo">กำลังโหลดข้อมูล...</span>
       <button class="refresh-btn" id="refreshBtn">รีเฟรชตอนนี้</button>
     </div>
+    <div class="admin-status-row" id="adminStatusRow"></div>
   </div>
   <div class="tabs" id="tabs"></div>
   <div class="stats" id="stats"></div>
@@ -180,12 +184,15 @@
 const ORDERS_KEY = 'material-orders-data-v1';
 const PO_KEY = 'po-entries-v1';
 const PIN_KEY = 'purchase-pin-v1';
+const ADMIN_PIN_KEY = 'admin-pin-v1';
 const POLL_MS = 15000;
 
 let orders = [];
 let poEntries = [];
 let purchasePin = null;
 let purchaseUnlocked = false;
+let adminPin = null;
+let adminUnlocked = false;
 let purchaseSubView = 'fulfill';
 let overviewFilter = 'all';
 let activeTab = 'request';
@@ -227,19 +234,31 @@ async function savePinValue(pin){
   try{ await window.storage.set(PIN_KEY, pin, true); return true; }
   catch(e){ showToast('บันทึกรหัสไม่สำเร็จ ลองใหม่อีกครั้ง'); return false; }
 }
+async function loadAdminPin(){
+  try{
+    const res = await window.storage.get(ADMIN_PIN_KEY, true);
+    return res && res.value ? res.value : null;
+  }catch(e){ return null; }
+}
+async function saveAdminPinValue(pin){
+  try{ await window.storage.set(ADMIN_PIN_KEY, pin, true); return true; }
+  catch(e){ showToast('บันทึกรหัสไม่สำเร็จ ลองใหม่อีกครั้ง'); return false; }
+}
 
 // refresh core data from shared storage — always call this right before
 // mutating+saving, so we never overwrite what someone else just added.
 async function refreshCore(){
-  const [freshOrders, freshPO, freshPin] = await Promise.all([
+  const [freshOrders, freshPO, freshPin, freshAdminPin] = await Promise.all([
     loadKey(ORDERS_KEY, orders),
     loadKey(PO_KEY, poEntries),
-    loadPin()
+    loadPin(),
+    loadAdminPin()
   ]);
   const newPending = freshOrders.filter(o=>!knownOrderIds.has(o.id) && o.status==='pending');
   orders = freshOrders;
   poEntries = freshPO;
   purchasePin = freshPin;
+  adminPin = freshAdminPin;
   knownOrderIds = new Set(orders.map(o=>o.id));
   lastSyncedAt = new Date();
   if(newPending.length){
@@ -312,11 +331,20 @@ function hideNotifyBanner(){
 }
 
 // ================= helpers =================
-function todayStr(){ return new Date().toISOString().slice(0,10); }
+// หมายเหตุ: ใช้เวลา "ท้องถิ่น" ของเครื่องผู้ใช้ในการฟอร์แมตวันที่เสมอ (ห้ามใช้ toISOString
+// กับวันที่แบบไม่มีเวลา เพราะ toISOString แปลงเป็น UTC ซึ่งสำหรับไทย (UTC+7) จะทำให้
+// วันที่เพี้ยนย้อนไป 1 วันได้ในหลายกรณี — เป็นสาเหตุของปัญหา "สั่งวันนี้แต่วันที่กลายเป็นวันนี้ไม่ใช่พรุ่งนี้")
+function toDateStr(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function todayStr(){ return toDateStr(new Date()); }
 function addDays(dateStr, days){
   const d = new Date(dateStr+'T00:00:00');
   d.setDate(d.getDate()+days);
-  return d.toISOString().slice(0,10);
+  return toDateStr(d);
 }
 function dayDiff(dateStr){
   const d = new Date(dateStr+'T00:00:00');
@@ -366,15 +394,19 @@ function tabsHtml(){
   const purchaseCount = orders.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว').length;
   return TABS.map(t=>{
     let label = t.label;
-    if(t.key==='approve' && pendingCount) label += ` <span class="badge-count">${pendingCount}</span>`;
+    if((t.key==='approve' || t.key==='overview') && !adminUnlocked) label += ' 🔒';
+    if(t.key==='approve' && pendingCount && adminUnlocked) label += ` <span class="badge-count">${pendingCount}</span>`;
     if(t.key==='purchase'){
-      if(!purchaseUnlocked) label += ' 🔒';
-      if(purchaseCount) label += ` <span class="badge-count">${purchaseCount}</span>`;
+      if(!adminUnlocked || !purchaseUnlocked) label += ' 🔒';
+      if(purchaseCount && adminUnlocked && purchaseUnlocked) label += ` <span class="badge-count">${purchaseCount}</span>`;
     }
     return `<button class="tabbtn ${t.key===activeTab?'active':''}" data-tab="${t.key}">${label}</button>`;
   }).join('');
 }
 function statsHtml(){
+  if(!adminUnlocked){
+    return `<div class="empty">สถิติและข้อมูลคำขอจะแสดงหลังจากผู้ดูแลระบบเข้าสู่ระบบ (แท็บ "อนุมัติ" หรือ "ภาพรวม")</div>`;
+  }
   const pending = orders.filter(o=>o.status==='pending').length;
   const approvedWaiting = orders.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว').length;
   const urgent = orders.filter(isUrgent).length;
@@ -389,7 +421,25 @@ function statsHtml(){
 function renderTabsAndStats(){
   document.getElementById('tabs').innerHTML = tabsHtml();
   document.getElementById('stats').innerHTML = statsHtml();
+  document.getElementById('adminStatusRow').innerHTML = adminStatusHtml();
   document.querySelectorAll('.tabbtn').forEach(b=>{ b.onclick = ()=>switchTab(b.dataset.tab); });
+  const logoutBtn = document.getElementById('adminLogoutBtn');
+  if(logoutBtn) logoutBtn.onclick = ()=>{
+    adminUnlocked=false;
+    showToast('🔒 ล็อกระบบแล้ว ต้องกรอกรหัสผู้ดูแลใหม่เพื่อเข้าดูข้อมูล');
+    renderTabsAndStats();
+    switchTab('request');
+  };
+  const chAdminBtn = document.getElementById('changeAdminPinBtn');
+  if(chAdminBtn) chAdminBtn.onclick = changeAdminPin;
+}
+function adminStatusHtml(){
+  if(!adminUnlocked) return '';
+  return `
+    <span class="admin-status-msg">🔓 ผู้ดูแลระบบ: เข้าสู่ระบบแล้ว (ปลดล็อกเฉพาะเซสชันนี้)</span>
+    <button class="small-link" id="changeAdminPinBtn">เปลี่ยนรหัสผู้ดูแล</button>
+    <button class="small-link" id="adminLogoutBtn">🔒 ล็อกออกจากระบบตอนนี้</button>
+  `;
 }
 
 // ================= tab switching =================
@@ -406,9 +456,9 @@ async function switchTab(key){
 function renderContentOnly(){
   const content = document.getElementById('content');
   if(activeTab==='request') content.innerHTML = viewRequest();
-  else if(activeTab==='approve') content.innerHTML = viewApprove();
-  else if(activeTab==='overview') content.innerHTML = viewOverview();
-  else if(activeTab==='purchase') content.innerHTML = viewPurchaseGate();
+  else if(activeTab==='approve') content.innerHTML = viewAdminGate(viewApprove);
+  else if(activeTab==='overview') content.innerHTML = viewAdminGate(viewOverview);
+  else if(activeTab==='purchase') content.innerHTML = viewAdminGate(viewPurchaseGate);
   bindContentEvents();
 }
 
@@ -500,11 +550,16 @@ function viewRequest(){
     <button class="btn btn-primary" id="submitBtn">ส่งคำขอสั่งของ</button>
   </div>
 
+  ${adminUnlocked ? `
   <div class="subhead">คำขอล่าสุด (<span id="reqCount">${orders.length}</span> รายการทั้งหมด)</div>
   <div id="recentList">${recentListHtml()}</div>
+  ` : `
+  <div class="empty">ส่งคำขอเรียบร้อยแล้วจะถูกส่งไปให้ผู้ดูแลระบบตรวจสอบและอนุมัติต่อไป (ประวัติคำขอจะแสดงให้ผู้ดูแลระบบเท่านั้น)</div>
+  `}
   `;
 }
 function updateRecentListOnly(){
+  if(!adminUnlocked) return;
   const el = document.getElementById('recentList');
   if(el) el.innerHTML = recentListHtml();
   const c = document.getElementById('reqCount');
@@ -524,6 +579,88 @@ function addItemRow(prefill){
     <button type="button" class="rm-item" onclick="document.getElementById('${id}').remove()">×</button>
   `;
   wrap.appendChild(div);
+}
+
+// ---------- admin login gate (guards: approve, overview, purchase) ----------
+function viewAdminGate(contentFn){
+  if(adminPin === null){
+    return `
+    <div class="lock-wrap">
+      <div class="lock-card">
+        <div class="icon">🔐</div>
+        <h2>ตั้งรหัสผ่านผู้ดูแลระบบ</h2>
+        <p class="d">ยังไม่มีการตั้งรหัสผู้ดูแล กรุณาตั้งรหัสผ่าน 4-6 ตัว (เฉพาะผู้ดูแล/หัวหน้างานเท่านั้นที่ควรรู้รหัสนี้) เพื่อดูข้อมูล อนุมัติ แก้ไข และจัดการคำขอ</p>
+        <input id="setup_admin_pin" type="password" inputmode="numeric" maxlength="6" placeholder="ตั้งรหัสผ่าน">
+        <button class="btn btn-primary" id="setupAdminPinBtn">ตั้งรหัสผ่าน</button>
+      </div>
+    </div>`;
+  }
+  if(!adminUnlocked){
+    return `
+    <div class="lock-wrap">
+      <div class="lock-card">
+        <div class="icon">🔒</div>
+        <h2>สำหรับผู้ดูแลระบบเท่านั้น</h2>
+        <p class="d">ช่างและโฟร์แมนส่งคำขอได้ที่แท็บ "ส่งคำขอ" โดยไม่ต้องล็อกอิน — หน้านี้สำหรับผู้ดูแล/หัวหน้างานที่ต้องดู อนุมัติ และจัดการข้อมูลเท่านั้น</p>
+        <input id="enter_admin_pin" type="password" inputmode="numeric" maxlength="6" placeholder="กรอกรหัสผ่านผู้ดูแล">
+        <button class="btn btn-primary" id="unlockAdminBtn">เข้าสู่ระบบผู้ดูแล</button>
+      </div>
+    </div>`;
+  }
+  return contentFn();
+}
+async function deleteOrder(id){
+  if(!adminUnlocked){ showToast('ต้องเข้าสู่ระบบผู้ดูแลก่อน'); return; }
+  if(!confirm('ยืนยันลบคำขอนี้? การลบไม่สามารถย้อนกลับได้')) return;
+  orders = await loadKey(ORDERS_KEY, orders);
+  orders = orders.filter(o=>o.id!==id);
+  knownOrderIds.delete(id);
+  const ok = await saveOrders();
+  lastSyncedAt = new Date();
+  if(ok) showToast('ลบคำขอแล้ว');
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+async function setupAdminPin(){
+  const pin = document.getElementById('setup_admin_pin').value.trim();
+  if(pin.length<4){ showToast('รหัสต้องมีอย่างน้อย 4 ตัว'); return; }
+  const existing = await loadAdminPin();
+  if(existing){
+    adminPin = existing;
+    showToast('มีการตั้งรหัสไว้แล้วโดยผู้อื่น กรุณาขอรหัสจากผู้ดูแลระบบ');
+    renderContentOnly();
+    return;
+  }
+  adminPin = pin;
+  adminUnlocked = true;
+  await saveAdminPinValue(pin);
+  showToast('ตั้งรหัสผู้ดูแลระบบเรียบร้อย');
+  renderTabsAndStats();
+  renderContentOnly();
+}
+async function unlockAdmin(){
+  const pin = document.getElementById('enter_admin_pin').value.trim();
+  const fresh = await loadAdminPin();
+  if(fresh) adminPin = fresh;
+  if(pin !== adminPin){ showToast('รหัสผ่านไม่ถูกต้อง'); return; }
+  adminUnlocked = true;
+  renderTabsAndStats();
+  renderContentOnly();
+}
+async function changeAdminPin(){
+  const cur = prompt('กรอกรหัสผ่านผู้ดูแลปัจจุบัน เพื่อยืนยันตัวตน');
+  if(cur === null) return;
+  const fresh = await loadAdminPin();
+  if(fresh) adminPin = fresh;
+  if(cur.trim() !== adminPin){ showToast('รหัสผ่านปัจจุบันไม่ถูกต้อง'); return; }
+  const next = prompt('กำหนดรหัสผ่านผู้ดูแลใหม่ (4-6 ตัว)');
+  if(next === null) return;
+  if(next.trim().length<4){ showToast('รหัสต้องมีอย่างน้อย 4 ตัว'); return; }
+  adminPin = next.trim();
+  await saveAdminPinValue(adminPin);
+  showToast('เปลี่ยนรหัสผู้ดูแลแล้ว');
 }
 
 // ---------- approve tab ----------
@@ -588,17 +725,14 @@ function viewOverview(){
   <div class="filterbar">
     ${filters.map(f=>`<button class="ov-filter ${overviewFilter===f.key?'active':''}" data-f="${f.key}">${f.label}</button>`).join('')}
   </div>
-  ${list.length ? list.slice(0,40).map(o=>ticketCard(o)).join('') : '<div class="empty">ไม่มีรายการในหมวดนี้</div>'}
+  ${list.length ? list.slice(0,40).map(o=>ticketCard(o, deleteActionHtml(o))).join('') : '<div class="empty">ไม่มีรายการในหมวดนี้</div>'}
   `;
+}
+function deleteActionHtml(order){
+  return `<div class="btn-row"><button class="btn btn-reject act-delete" data-id="${order.id}">🗑 ลบคำขอนี้ (ผู้ดูแลระบบเท่านั้น)</button></div>`;
 }
 
 // ---------- purchase tab (PIN-gated) ----------
-function poTicketNo(){
-  const seq = poEntries.length + 1;
-  const d = new Date();
-  const ym = String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0');
-  return 'PO-'+ym+'-'+String(seq).padStart(3,'0');
-}
 function viewPurchaseGate(){
   if(purchasePin === null){
     return `
@@ -632,7 +766,7 @@ function viewPurchaseContent(){
     <span class="hint">ปลดล็อกแล้วสำหรับเซสชันนี้</span>
     <div style="display:flex;gap:10px;">
       <button class="small-link" id="changePinBtn">เปลี่ยนรหัส</button>
-      <button class="small-link" id="lockBtn">ล็อกหน้านี้</button>
+      <button class="small-link" id="lockBtn">🔒 ล็อกหน้านี้ตอนนี้</button>
     </div>
   </div>
   <div class="subnav">
@@ -684,8 +818,8 @@ function viewPO(){
   return `
   <div class="panel">
     <h2>บันทึก PO / ใบสั่งซื้อ</h2>
-    <label>เลขที่ PO</label>
-    <input id="po_no" value="${poTicketNo()}" disabled>
+    <label>เลขที่ PO (ฝ่ายจัดซื้อกรอกเอง)</label>
+    <input id="po_no" placeholder="เช่น PO.L6-2607001">
     <label>ชื่อผู้บันทึก (จัดซื้อ)</label>
     <input id="po_staff" placeholder="ชื่อเจ้าหน้าที่จัดซื้อ">
     <div class="row2">
@@ -760,12 +894,22 @@ function bindContentEvents(){
     document.getElementById('addItemBtn').onclick = ()=>addItemRow();
     document.getElementById('submitBtn').onclick = submitRequest;
   }
+  else if((activeTab==='approve'||activeTab==='overview'||activeTab==='purchase') && (adminPin===null || !adminUnlocked)){
+    if(adminPin===null){
+      const btn = document.getElementById('setupAdminPinBtn');
+      if(btn) btn.onclick = setupAdminPin;
+    } else {
+      const btn = document.getElementById('unlockAdminBtn');
+      if(btn) btn.onclick = unlockAdmin;
+    }
+  }
   else if(activeTab==='approve'){
     document.querySelectorAll('.act-approve').forEach(b=>b.onclick=()=>decide(b.dataset.id,'approved'));
     document.querySelectorAll('.act-reject').forEach(b=>b.onclick=()=>decide(b.dataset.id,'rejected'));
   }
   else if(activeTab==='overview'){
     document.querySelectorAll('.ov-filter').forEach(b=>b.onclick=()=>{ overviewFilter=b.dataset.f; renderContentOnly(); });
+    document.querySelectorAll('.act-delete').forEach(b=>b.onclick=()=>deleteOrder(b.dataset.id));
   }
   else if(activeTab==='purchase'){
     if(purchasePin === null){
@@ -775,7 +919,12 @@ function bindContentEvents(){
       const btn = document.getElementById('unlockBtn');
       if(btn) btn.onclick = unlockPurchase;
     } else {
-      document.getElementById('lockBtn').onclick = ()=>{ purchaseUnlocked=false; renderTabsAndStats(); renderContentOnly(); };
+      document.getElementById('lockBtn').onclick = ()=>{
+        purchaseUnlocked=false;
+        showToast('🔒 ล็อกหน้าจัดซื้อแล้ว ต้องกรอกรหัสจัดซื้อใหม่');
+        renderTabsAndStats();
+        renderContentOnly();
+      };
       document.getElementById('changePinBtn').onclick = changePin;
       document.querySelectorAll('.sub-nav-btn').forEach(b=>b.onclick=()=>{ purchaseSubView=b.dataset.v; renderContentOnly(); });
       if(purchaseSubView==='fulfill'){
@@ -897,6 +1046,7 @@ async function savePurchase(id){
 }
 
 async function submitPO(){
+  const poNumber = document.getElementById('po_no').value.trim();
   const staff = document.getElementById('po_staff').value.trim();
   const site = document.getElementById('po_site').value.trim();
   const vendor = document.getElementById('po_vendor').value.trim();
@@ -905,8 +1055,8 @@ async function submitPO(){
   const orderId = document.getElementById('po_order').value;
   const note = document.getElementById('po_note').value.trim();
 
-  if(!staff || !site || !amount || !poDate){
-    showToast('กรุณากรอกชื่อผู้บันทึก, หน้างาน, จำนวนเงิน และวันที่ลง PO');
+  if(!poNumber || !staff || !site || !amount || !poDate){
+    showToast('กรุณากรอกเลขที่ PO, ชื่อผู้บันทึก, หน้างาน, จำนวนเงิน และวันที่ลง PO');
     return;
   }
   let orderTicketLabel = '';
@@ -916,9 +1066,14 @@ async function submitPO(){
   }
 
   poEntries = await loadKey(PO_KEY, poEntries);
+  const dup = poEntries.some(p=>p.poNumber.trim().toLowerCase()===poNumber.toLowerCase());
+  if(dup){
+    showToast('⚠️ เลขที่ PO นี้มีอยู่แล้วในระบบ กรุณาตรวจสอบเลขที่ PO อีกครั้ง');
+    return;
+  }
   const entry = {
     id: 'po_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
-    poNumber: poTicketNo(),
+    poNumber,
     site, vendor, amount: Number(amount), poDate, orderId, orderTicketLabel, note,
     createdBy: staff,
     createdAt: new Date().toISOString()
@@ -1015,6 +1170,7 @@ async function manualRefresh(){
   orders = await loadKey(ORDERS_KEY, []);
   poEntries = await loadKey(PO_KEY, []);
   purchasePin = await loadPin();
+  adminPin = await loadAdminPin();
   knownOrderIds = new Set(orders.map(o=>o.id));
   lastSyncedAt = new Date();
 
