@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบสั่งวัสดุหน้างาน</title>
+<meta name="theme-color" content="#3E6E56">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIuC4o+C4sOC4muC4muC4quC4seC5iOC4h+C4p+C4seC4quC4lOC4uOC4q+C4meC5ieC4suC4h+C4suC4mSIsICJzaG9ydF9uYW1lIjogIuC4quC4seC5iOC4h+C4p+C4seC4quC4lOC4uCIsICJzdGFydF91cmwiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjRUFGNUVDIiwgInRoZW1lX2NvbG9yIjogIiMzRTZFNTYiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FZQUFBQlMzR3dIQUFBRmswbEVRVlI0MnUzZHZYRWJWeFNHWWV3T3g1RUxjQWZxZ3V4Q1RPUVd4RnlLN2R4cXdVNnNMc1F1MUlFTGNLU0VUcXdSYlEvTS9ibS81enp2akJMTkVGd3N2dmQrNXdLN3hPVUNBQUFBQUFBQUFBQUFBQUFRaG1YbWc3OTkrL3JKU3pnR2p4OCtMZ1FRZGt3bXhTTDB5Q3pESXZqSUxNSWkrTWdzd2lMNHlDekNJdmpJTE1JcS9NZzhCU3lDajh4dHNBby9NcmZCS3Z6SUxNRXEvTWdzd1NyOHlDekJLdnpJTE1FcS9NZ3N3U3I4eUN6Qkt2eklMTUVxL01nc3dlcDBJalByaUZZQ3JmSzJSQXYvcDE5K2w0N0szRDNjRDNNc1o2OGJ1b255b2doKyszTTlrZ2pkUnFBUlZuL2h6M3ZleitadjlTSWc4L2xmZTlvbi9DVG8zUUxlQmtWcTFoN1dXZjIxd0NndG9BR2dBV1piL1lGU3VkUUEwQUFBQVl3L1NEZ0dhUUJvQUlBQUFBRUFBdGdBSTgxR1dBTkFBd0FFQUFnQUVBQWdBRUFBSURnM21aLzg1ejgrUzhEZnZQcmhsUVlRZm9zQkFRQUNBQVFBQ0dEVDUzeEU1c2FMRGcwQUVBQWdBRUFBZ0FBQUFRQUNBQVFBQ0FBRXcvMEF1Rnd1N2djUS91UzRId0FnQUVBQWdBQUFBUUxqWGdEbjQzSnhRNHprYXdDQUFBQUJBQUlBQkFBSUFCQUFJQUJBQUNBZWJvZ1pISjlXYTRDMDRaL3BPQWtBR0lFd00zZnZmenowYzU5KytwVUF5QkgyLzMyczc3Lzc5cDkvZmlIQTZKdkxiSnZna3FGL2tVbGtjRCtBbFQ2MURFWWd3ZThqd3lBaUVFRHdVNHRBQU1IL0IzdmYwVG45ZXp1TFFJREU0Uy94OXVYeng3aDd1UC92ekw5SGhBNFNFQ0JaOEp1OFovODh5SHRrNk5BR0JFZ1EvcTRmVkIyUm9XRWJFRUR3Mjh1d1JZUkdiVUNBZ09FZi90S0V2U0pVbE1ERmNNSS94bmkwcFEwMGdQQ0hDUDZSTnFqVUJCcEErT2RwZ3dwTm9BRW1EbitJNE85dGc4Sk5vQUdFZjc0MktOZ0VCQkQrMUJJUVlESlNoSC9Qdm9BQWVWYi9WT0hmSWtHQkZpQ0E4S2VXZ0FDVHpQMm9zeDhnZ0xrLzlYNkFBRWFmMUtNUUFhejhxWnVBQUdiLzFIc0JBbGo5VTdjQUFheitxVnVBQUZiL0tVYVZXaTFBQUt0L24vQlh2TWxsejJNVHdPcmZiK1UvSzBHQkZpQUEra3RSc3cwSU1NLzRrMnIxTDdVdnVOSUN0Ky9lUEJFQTgyeDZPLzFwUkFJZ2JmZ0pNTkQ0Zy9Kc0dZTUlNQWdoNS85V3EvK0p4eUFBVW80K0JFRDY4Qk1BNlNIQUFCdmdVUE4vcjlYLzRPY0JCRURLMFljQWFOSnVJNGVmQUdnWGZuc0FwR2JRYjRzbkFGS09QZ1JBK3ZBVFFFaFRoNThBU2NMdkFqd0NwRi81UzBvUVpmVW5RTEt4cDRRRWtjSlBnSVF6L3hrSm9vV2ZBRWszdkVja2lMcVBJRUJEcmwzMFZpcGNleTZxcXhMb25xdi9sZXVRSG4vK2JRa3B3TjNEUGFNYVNSQng5RGtrd09PSGo0dUk1WklnK2hkMVR6MENhWUc2RW13Ti84eXZ3L1I3Z0NnUzFKakpXK3dKaGpqLzJiOGpiQ1lKV284TFJ5V0lNUGUvdEFFT0k4QlhDWXhFWlNTSXZPbjlONGMydGJkdlh6K0pWWVhLcmgycVVuK0VkclR3SDN3TE5GUURUTVcxQU5YK0s4bEJWdTFTNFNjQStkSkxkRWdBbndkTU1LYlVDUEVrbzA5MUFSQmdITm43K3lkYStiZU9QNmNFMEFLVHQ4RHM0MHloYzZRQk1yZkExbU1JdXZxZkZrQUxCR2lCbHdJK1l2Z0xuaHNOb0FXdUg4ZGtJOUxlMWIrSUFGb2dTQXQ4RGZ6emZ3bk9pUVlZdlFVNmZvWG9UT0Uvc3ZvWEUwQUxCR3VDUk9lZ1dBT1FJTWhlWUVLT3J2NUdJS05RMnRHbmlnQmFnQVF6aGI5S0E1REFmbUNtNTFwbEJDSkI1ZjFBQmdsZWVJNGxWditxZXdBU2tHRDA4Rjh1Qis4STI0Tzd4eHFNQVZIZVFkcndYRXVHdjJvRGFJSkdUUkNsRFRxRXYwa0RhSUxHRzhMWjJtRGo4Nm9SL2lZTm9Ba2FOc0ZzYmRBNS9FMGJRQk0wYm9LUjIyREhjNmdaL2k0Q0VDR3hDQU1GdjdzQUpHZ3NRUzhaRGh4anEvQjNGNEFJSFVXb0tjUEI0MmtaL0tFRUlFSkhDYzVLVWVqMzlnai9jQUlRWVNBUkd0RXIrRU1MUUlUNEl2UU8vaFFDa0NHZUNLTUVmem9CU0RHdkRLT0ZQb3dBT0xGNHZIdnpsRFgwQkVCUktXWUpPd0FBQUFBQUFBQUF5TVZmQ2FaaWlZYWVDMjhBQUFBQVNVVk9SSzVDWUlJPSIsICJzaXplcyI6ICIxOTJ4MTkyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0sIHsic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBZ0FBQUFJQUNBWUFBQUQwZU5UNkFBQVFHMGxFUVZSNDJ1M2RNWElVOTlQSDRSR2xVcVFEY0lPOWhiZ0ZKUGdLa09NWTUzQUZuTUF0cEZ2b0JoekFrUk01c0trU0ZCaWgzWm5wN3UvekpHL3kxdDh3TzVyKy9Iclc4cklBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFNQ3h6bHdDN3J0Njlmek9WWUM1YnQ1Lzh0eEhBQmp3QUFKQkFHRFlBNGdDQVlDQkR5QUlCQUFHUG9BZ0VBQVkrZ0JpUUFCZzZBT0lBUUdBb1E4Z0JnUUFCaitBRUJBQUdQb0FZa0FBR1B3QVFnQUJZUEFEQ0FFRWdNRVBJQVFRQUFZL2dCQkFBQmo4QUVLQVIzbmlFaGorQUo2bk5nQzRVUUZzQXdRQUJqK0FFSmpJS3dEREg4Qnoxd1lBTnlDQWJZQU5BSVkvZ09leEFNRE5CdUM1UElPMWlSc01ZQlN2Qkd3QURIOEF6MnNFZ0pzSndIT2JMNnhKM0VBQW8za2xZQU5nK0FONG5pTUEzQ3dBbnVzQ0FEY0pnT2U3QUhCekFPQTVMd0RjRkFCNDNnc0FOd01BbnZzQ3dFMEFnT2UvQVBEaEEyQU9DQUFmT2dEbWdRRHdZUU5nTGdnQUh6SUE1b01BOE9FQ1lFNElBQjhxQU9hRkFQQmhBbUJ1Q0FBZklnRG1od0F3L0FFd1J3UUFBSkFYQUU3L0FKZ25ZUUZnK0FOZ3JvUUZnT0VQZ1BrU3VnRUFBSUlDd09rZkFITW1MQUFNZndETW03QUFNUHdCTUhkQ053QUFRRkFBT1AwRFlQNzh1ak1YbjhlNGZ2ZlJSWUJDbnIxKzRTTHM1T2I5cDVhejlOeEhoNEVQODM1R0JRRmpOd0JPL3dZL1lETmdDMkFEZ01FUC9NL1BzaERnV3kyL0JPajBiL2dEZnE3TnBiQUFNUHc5SkFBLzMrYlQ4YndDd0lNQkFuL1d2UktnMVFiQTZkL3dCL3pjbTFPQkFRQUFoQVdBMDc5VEFPRG4zN3l5QWNBUFArQTV3UFFBY1ByM1F3OTRIdGdDMkFBQUFOTUR3T2xmN1FPZUM3WUFOZ0FBd1BRQWNQcFgrWURuZ3kyQURRQUFJQUFBZ0hFQllQMFB3QVJWNTVrTlFCRHY5d0RQQ1VvSGdOTS9BTFlBTmdBQWdBQUFBTVlGZ1BVL0FCTlZtMjgyQUFCZ0F3QUFDSUNOV2Y4RE1GbWxPV2NEQUFBMkFBQ0FBTmlROVQ4QUNhck1PeHNBQUxBQkFBQUVBQUFnQU5iaS9UOEFTU3JNUFJzQUFMQUJBQUFFQUFBZ0FOYmcvVDhBaWZhZWZ6WUFBR0FEQUFBSUFBQkFBQUFBQXVCb3ZnQUlRTEk5NTZBTkFBRFlBQUFBQWdBQUVBQUFnQUFBQUFRQUFDQUFBQUFCOEMyL0F3QUE5cHVITmdBQVlBTUFBQWdBQUVBQUFBQUNBQUFRQUFDQUFBQUFCQUFBSUFBQUFBRUFBQWdBQUVBQUFBQ25kZTRTVU5udDUxc1hnYllPVHc4dUFqWUFZUGlUZUErN2p4RUFZUGpqZmdZQkFCNld1SzlCQUFBQUFnQUFFQUFBZ0FBQUFBUUFBQ0FBQUFBQkFBQUlBQUJBQUZDUTM1K08reG9FQUFBZ0FIQmFBdmN6Q0FBOE5LSDRQZXcrcHFwemx3QVJBR0FEQUFBSUFBQkFBQUFBQWdBQUVBQUFnQUFBQUFRQUFDQUFBQUFCQUFBSUFBQkFBQUFBQWdBQUVBQUFnQUFBQUFRQUFDQUFBQUFCQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQVR1M2NKYUN5MjgrM0xnSnRIWjRlWEFSc0FNRHdKL0VlZGg4akFNRHd4LzBNQWdBOExIRmZnd0FBQUFRQUFDQUFBQUFCQUFBSUFBQkFBQUFBQWdBQUVBRFU1OWVuNHI0R0FRQUFDQUNjbHNEOURBSUFEMDBvZmcrN2o2bktmdzRZRVFCZ0F3QUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBRTd1M0NXZ3N0dlB0eTVDQTRlbkJ4Y0JiQURBOEUvOHJIeGVJQURBOFBlNUFRSUFEQkdmSHlBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQXdPUDRUWUFBUlR6Ny9iZlYvcmV2MzM1d2dSRUFBTk1HL0xIL2JJRWdBR0IzaDZjSHYweW0rZWZIdnNQKzZEL3Y1Y1cvLy9ldnYzMlFBZ0NBS2NQK3diNkV3SDJpUUFDQUxRREpwLyt4US85WG9rQU1DQUFRQVQ0ckF6ODhCZ1NCQUFDREJVTmZFSWdCQVFCZzZJc0IxME1BQUJqOHNURWdCQVFBZ0tGdks0QUFBREQ0YlFVUUFBQUd2eEJBQUFBWStqa2hJQVlFQUlEQmJ5dkFldnpuZ0FIRG4vcGJBV3dBQUF4KzJ3QUVBSURCTHdRUUFJREIzOXYxMncrdWt4QVFBQUFUaDlvYVEvNngvN3kyMS9IeVFnUUlBTURnTit4UCtlZHJjNDF0QXdRQVlQZ2I5aWYwdllGYStSdjV0Z0VDQURENERmME5vcUJpRE5nR0NBREE4RGYwZzJQQU5rQUFBQWEvb1I4YUE3WUJBZ0F3L0EzOTRCaXdEUkFBZ09GdjhPOFVBM3VIZ0FnUUFJREJiK2lIYmdXOEVoQUFnT0Z2OEFkdkJXd0RCQUJnK0J2OG9TRWdBZ1FBa0RuOERYNGhJQUlFQUdEd2t4b0N2aGV3UEhIbkFZWS9wVUpnNjIyQURRREFyT0Z2OE5zR1BEZ0NBamNCQWdBWU4vd05maUVnQW43T0t3REE4S2QrQ0d3VkFUWUFBTDJHdjhGdkcyQVRZQU1BR1A3WUJ0Z0VDQURBOEVjRWlJQnZlUVVBdEJ6K0JyOElXSDFJRDM4ZFlBTUFHUDdZQmdSdUFnUUFZUGdqQWdJandDc0FvTVh3Ti9qNWFRU3NPYWdIdmc2d0FRQU1mMndEQWpjQkFnQW96ZkNuVkFRSUFJRDFULytHUCtVaVlOQVdRQUFBaGo4aUlEQUNCQUJnK0NNQ0FpTkFBQUNHUHlJZ01BSUVBRkNHNFUrN0NCQUFnTk8vNFU5Z0JEVGVBZ2dBd1BCSEJBUkdnQUFBREg5RVFHQUVDQUJnTjRZL295SkFBQUJPLzRZL2dSSFFiQXNnQUFEREh4RVFHQUVDQU5pVTRjLzRDQkFBZ05NL0JHcXlCUkFBd0diRDMrbWZtQzFBZ3dnUUFNQW1ESC9pSWtBQUFPbW5mOE9meUFnb3ZnVVFBTUNxd3graUZZNEFBUUNzeXVtZjZDMkFEUUNRZVBvMy9CRUJkYmNBQWdCdzhvZkFUWUFBQUZZNS9RTzF0d0FDQUhENmg4QXRnQUFBVG5yNk4vd1JBVDIyQUFJQURIOFhBYlpTS0FJRUFPRDBEMXR0QVd3QUFLZC9zQVVRQUlEVFA5Z0NDQURBOEFjUklBQ0FGVmovdzQ0S3ZBWVFBSURUUDRaaTRCWkFBSURUUDlRWi9oMGlZRWp3Q0FEQTZaOWFnL0R5b25ZSUROa0NDQUJ3K2djbjVNQy9vd0FBblA2cE93Q3JSc0NBTFlBQUFLRDI2VGZwZXdFQ0FGakRxZGIvVHY5c052enYvLzlYQzRGVGJRRjIrbnNKQUFCcUQzL2JBQUVBN0gvNmg5WUJVZFRWbTVkM0FnQW96ZnFmRXNPN3lpdUJ4bDhHRkFBQTlEMjVleVVnQUlBZjgrVS9SZzcvS2hGd29pM0ExcThCQkFBQWZZZS9UWUFBQUVCb0NBRUJBUHpIK3AveHAvOEsvOHlHcndFRUFBQnpCdkVKaDdFTkFBQVkvZ0lBeUdQOVQ0dmh2N2RtOFNFQVlEQy8vUThEdUordHZnY2dBQURvZi9xMytoY0F3R2xaLzJQNHp3d1JBUUJEV2Y5aitQZTF4V3NBQVFCQXorR1BBQURXWWYxUGFWVlAvMDIyRWdJQWdINm5mMS82RXdBQUdQNElBR0R4QlVBTS93blcvaUtnQUFDZ3gvQkhBQURyOHdWQXlnMy9UcWYvQm45V0FRQ0FnV29EQUFERlR2K0d2d0FBZnM0WEFESDg1MWp6aTRBQ0FJQ2F3eDhiQUdCYnZnQklpZUhmL2ZSZi9NOHZBQUF3UEcwQUFHRG4wNy9oTHdBQU1Qd1JBQUFZL2dnQUFFN052MFlxQUFBUGIzRDZMMkN0M3dVZ0FJQ3YrRmNBQmFUaG4vRjNFd0FBR1A2QkJBQ0E0Vy80Q3dBQURIOEVBQUE0L1FzQUFKeitEWDhCQUlEaGIvZ0xBQUFNZjhOZkFBQVloUDdPQ0FDQWlvUFFRSFQ2RndBQW9hZmdsQWl3K2tjQUFJWi9sZUZvK0NNQUFQWWRnbE1qd1BCSEFBQ0dmOVZoT1czNEl3QUF1ZzFCUTlQcFh3QUFoSjZBSjBTQTFUOENBREQ4d3lMQThFY0FBSVovV0FRWS9nZ0F3UEFQaXdEZlgwQUFBSWEvd2VyMGp3QUFEUC9wRVdEMWp3QUE0azY2Vy8yNXExNGZ3NytveXdzQkFLenYrdTBIMFJJWUFZYi9iRGQvL0hrbUFBQ0tETDhxRWVDN0NiUUxnSnYzbjg1Yy9vMGZGSzlmdUFnWS9vYXYwejgyQUVCdkZWNTU3QmtCVnY4SUFFQUVoRVdBNFk4QUFFUkFXQVFZL2dnQWZ2M0I0WHNBVkI0d0ltRGtaeE9yOEw4Q0tBQUFtd0FEMnVuZkJnQmJBQXhCZi8vS0VXRDFuMmV0M3dFZ0FBQVIwQ1FDREg5R0JZRGZCV0FMQUNMQThDY3dBQkFCRkw0L0JyekxuaEFCdnZUWFZQRXZBQW9BUkFBMkFZVWpZTmZoNy9SdkF3QVllcTdIL3BzQXd6L1BtbDhBRkFEWUFpQUNpa2FBOS82TTN3RDRJbUNkQ0JBQ2lJQWFFV0Q0RXhFQTJBWlErSDRZK0FXMDZoSGdTMzhETlBnQ29BQkFCR0FUVUNnQ2ZPa1BBVUNKQ0JBQ2hwenJzOThtd1BEUHR2WVhBTXNFZ084QkNBRUszd09EVjlLVklzQjcveUdhclArWFpWbk9mVm84TkFTK2VuQysrK2lpTUNZQzlvNGN3NTg5bERsNVg3MTZmdWZqZ0tJbmtvUkIwZWprWnZqUHZvKzJXUDh2aSs4QUFJYWpnVWprejBtWkFQQTlBRUFFK0hzU0dBQUFocU8vSHdJQXFQYkFUM3BIUG5WSUd2N3JPZEhQeDFidi84c0ZnTmNBZ0dIcDc0TU5BSUNoQ1FJQTJIMlFwZjJyY2xNaVFNaXNxK0g2djJRQWVBMEFHS0QrN05nQUFFTlBPd2FwUDdPZkJ3RUFHQWF1b2M4NzJ0YnIvN0lCNERVQVlMQ0NEUUJRYlhpbHZnYm9FZ0VpWlJ0TnYveFhQZ0JzQVFCRDF2REhCZ0FZZXZvUkFZYS8rMThBQUlhRTYrbHpqYkxYK3I5OEFIZ05BRTVCSWdEM3ZRMEFZR0M1cGo1UHAvK1VBTEFGQUtjaEVXRDR1OTl0QUFDRHczWDFHVHI5cHdTQUxRQTRGWWtBdzk5OWJnTUFlRGlLQU56ZktRRmdDd0NHbE92cmM1dWd3dnJmQmdCd1N1b1dBWWEvK3pveEFHd0J3R2t5K2hyN3JKeitiUUNBc2hGZ0MvRGphM3pNZFRiODI1LytLdzMvbGdGZ0N3QlpEODM0RURnMkhIQWZUOW9BaUFBb3ZnWGcrTUZ1OEk5UzdmUy9MTXR5N21NQlZqczlHV0RDeStuZkJzQVdBQUtIa1ZjQkdQNGxULyt0QXdCd2tnTDNhMmdBMkFKQWd5MEFCS3Q2K2greEFSQUIwQ0FDYkFFSVBQMVhIdjRqQWdESWZMaUMrMU1BMkFKQWh5MkFDQ0JvK0ZjLy9ZL2FBSWdBYUJJQk1GeUg0VDhxQUVRQTVKNjJ3UDBZSGdCQWt5MkFDR0RvOE85eStoOFpBTFlBSUFMQThBL2RBSWdBeUgwSWcvc3VPQUJFQURUWkFuZ1lNMlQ0ZHp2OWp3NEFRQVNBNFI4YUFMWUFJQUxBOEEvZEFJZ0E4SkRHZlVWZ0FJZ0FhTFFGOExDbTBmM1UrZlFmRXdBaUFFUUFoci9oSHhvQUlnQkVBSWEvNFI4YUFDSUFSQUNHditFZkdnQWlBRHpNY2I4US9Ic0FSQUEwMlFKNHFGUGtQcGwwK2wrV1pZa2ZnbGV2bnQvNXFZRkdnOXAvb3BnZDdydHB3ejk2QTJBVEFFMkhzMjBBaHI4QUVBRWdBakQ4RGYvSE1manU4VG9BR2c1cHJ3VGNXNGEvRFlCTkFJUnRBbXdEREgvRFh3Q0lBQkFCR1A2Ry84TVpkai9nZFFBMEhkQmVDYmgvREg4YkFKc0FDTnNFMkFZWS9vYS9EWUJ0QUlSdkFtd0QzQ3VHdndBUUFSQWNBVUxBL1dINGY1ZFhBQSs5UWJ3U2dMN0QyR3NCdzkvd3R3R3dEUURiQU53SHlZTmZBSWdBeUkwQUlSRDkyUnYrQWtBRVFIb0VDSUc0ejl2d0Z3QkNBQXdGSVJEMkdSditBa0FFZ0NFaEJvSStUNE5mQUFnQk1EU0VRTmhuYVBnTEFDRUFCb2dZQ1B2TURIOEJJQUxBVUJFRFFaK1B3UzhBaEFBWU1tSWc3UE13L0FXQUVBQ0RSd3dFWFh1RFh3QUlBUkFCb2lEc0doditBa0FJZ0JBUUJVSFgwZUFYQUVJQVJNQWNhOFRCd090aytBc0FNUUQ0ci8wRk1mZ0ZnQkFBaElEQmp3QVFBNEFRTVBnUkFHSUFFQUdHUHdKQURJQVF3T0JIQUFnQ0VBTVkrZ0xBSlJBRUlBUXcrQVVBb2dDRUFBYS9BRUFnZ0JqQTBCY0FBTk1qK00xTEVXendDd0FBTVlDaEx3QUF4QUNHdmdBQUVBUUdQZ0lBUUF3WStnZ0FBRkZnMkNNQUFFUkI0U2d3N0FVQUFBTUR3WUFIQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBREcrZ2V1R2tFMWQ5TlpUUUFBQUFCSlJVNUVya0pnZ2c9PSIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn1dfQ==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFk0lEQVR42u3dvXEbVxSGYewOx5ELcAfqguxCTOQWxFyK7dxqwU6sLsQu1IELcKSETqwRbQ/M/bm/5zzvjBLNEFwsvvd+5wK7xOUCAAAAAAAAAAAAAAAQhmXmg799+/rJSzgGjx8+LgQQdkwmxSL0yCzDIvjILMIi+MgswiL4yCzCIvjILMIq/Mg8BSyCj8xtsAo/MrfBKvzILMEq/MgswSr8yCzBKvzILMEq/MgswSr8yCzBKvzILMEq/Mgswep0IjPriFYCrfK2RAv/p19+l47K3D3cD3MsZ68buonyogh++3M9kgjdRqARVn/hz3vez+Zv9SIg8/lfe9on/CTo3QLeBkVq1h7WWf21wCgtoAGgAWZb/YFSudQA0AAAAYw/SDgGaQBoAIAAAAEAAtgAI81GWANAAwAEAAgAEAAgAEAAIDg3mZ/85z8+S8DfvPrhlQYQfosBAQACAAQACGDT53xE5saLDg0AEAAgAEAAgAAAAQACAAQACAAEw/0AuFwu7gcQ/uS4HwAgAEAAgAAAAQLjXgDn43JxQ4zkawCAAAABAAIABAAIABAAIABAACAebogZHJ9Wa4C04Z/pOAkAGIEwM3fvfzz0c59++pUAyBH2/32s77/79p9/fiHA6JvLbJvgkqF/kUlkcD+AlT61DEYgwe8jwyAiEEDwU4tAAMH/B3vf0Tn9ezuLQIDE4S/x9uXzx7h7uP/vzL9HhA4SECBZ8Ju8Z/88yHtk6NAGBEgQ/q4fVB2RoWEbEEDw28uwRYRGbUCAgOEf/tKEvSJUlMDFcMI/xni0pQ00gPCHCP6RNqjUBBpA+OdpgwpNoAEmDn+I4O9tg8JNoAGEf742KNgEBBD+1BIQYDJShH/PvoAAeVb/VOHfIkGBFiCA8KeWgACTzP2osx8ggLk/9X6AAEaf1KMQAaz8qZuAAGb/1HsBAlj9U7cAAaz+qVuAAFb/KUaVWi1AAKt/n/BXvMllz2MTwOrfb+U/K0GBFiAA+ktRsw0IMM/4k2r1L7UvuNICt+/ePBEA82x6O/1pRAIgbfgJMND4g/JsGYMIMAgh5/9Wq/+JxyAAUo4+BED68BMA6SHAABvgUPN/r9X/4OcBBEDK0YcAaNJuI4efAGgXfnsApGbQb4snAFKOPgRA+vATQEhTh58AScLvAjwCpF/5S0oQZfUnQLKxp4QEkcJPgIQz/xkJooWfAEk3vEckiLqPIEBDrl30Vipcey6qqxLonqv/leuQHn/+bQkpwN3DPaMaSRBx9DkkwOOHj4uI5ZIg+hd1Tz0CaYG6EmwN/8yvw/R7gCgS1JjJW+wJhjj/2b8jbCYJWo8LRyWIMPe/tAEOI8BXCYxEZSSIvOn9N4c2tbdvXz+JVYXKrh2qUn+EdrTwH3wLNFQDTMW1ANX+K8lBVu1S4ScA+dJLdEgAnwdMMKbUCPEko091ARBgHNn7+yda+beOP6cE0AKTt8Ds40yhc6QBMrfA1mMIuvqfFkALBGiBlwI+YvgLnhsNoAWuH8dkI9Le1b+IAFogSAt8DfzzfwnOiQYYvQU6foXoTOE/svoXE0ALBGuCROegWAOQIMheYEKOrv5GIKNQ2tGnigBagAQzhb9KA5DAfmCm51plBCJB5f1ABgleeI4lVv+qewASkGD08F8uB+8I24O7xxqMAVHeQdrwXEuGv2oDaIJGTRClDTqEv0kDaILGG8LZ2mDj86oR/iYNoAkaNsFsbdA5/E0bQBM0boKR22DHc6gZ/i4CECGxCAMFv7sAJGgsQS8ZDhxjq/B3F4AIHUWoKcPB42kZ/KEEIEJHCc5KUej39gj/cAIQYSARGtEr+EMLQIT4IvQO/hQCkCGeCKMEfzoBSDGvDKOFPowAOLF4vHvzlDX0BEBRKWYJOwAAAAAAAAAAyMVfCaZiiYaeC28AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="สั่งวัสดุหน้างาน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAF5EC;
+    --panel:#FFFFFF;
+    --ink:#28362E;
+    --ink-soft:#6C8478;
+    --line:#D2E7D8;
+    --steel:#5E9C7D;
+    --steel-dark:#3E6E56;
+    --mint:#DCF0E3;
+    --yellow:#D9A441;
+    --yellow-soft:#FBF0DC;
+    --yellow-dark:#8A6A1E;
+    --green:#3E7A5C;
+    --green-soft:#E3F1E7;
+    --red:#C17268;
+    --red-soft:#F7E7E4;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Sarabun',sans-serif;}
+  h1,h2,h3,.eyebrow,.tabbtn,.stamp,.btn,.ticketno{font-family:'Kanit',sans-serif;}
+
+  .app{max-width:820px;margin:0 auto;padding-bottom:60px;min-height:100vh;}
+
+  .topbar{background:var(--steel-dark);color:#fff;padding:22px 18px 20px;position:relative;overflow:hidden;}
+  .topbar::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:repeating-linear-gradient(45deg,rgba(255,255,255,0.10) 0 10px,transparent 10px 20px);border-radius:50%;}
+  .topbar h1{margin:0;font-size:22px;font-weight:700;letter-spacing:.3px;}
+  .topbar .sub{margin:4px 0 0;font-size:13px;color:#CFE7DA;font-family:'Sarabun',sans-serif;}
+  .sync-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;position:relative;z-index:1;gap:8px;}
+  .sync-info{font-size:11px;color:#CFE7DA;}
+  .refresh-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer;font-family:'Sarabun',sans-serif;flex-shrink:0;}
+  .refresh-btn:hover{background:rgba(255,255,255,0.28);}
+
+  .tabs{display:flex;gap:0;margin:14px 14px 0;background:var(--panel);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+  .tabbtn{flex:1;padding:12px 4px;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink-soft);background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;transition:.15s;}
+  .tabbtn.active{color:var(--steel-dark);border-bottom-color:var(--steel);background:var(--mint);}
+  .tabbtn:hover{color:var(--steel-dark);}
+  .badge-count{display:inline-block;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;min-width:16px;height:16px;line-height:16px;border-radius:8px;padding:0 4px;margin-left:4px;vertical-align:middle;}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 14px 0;}
+  .stat{background:var(--panel);border-radius:var(--radius);padding:10px 6px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+  .stat b{display:block;font-size:20px;font-weight:700;color:var(--steel-dark);}
+  .stat.urgent b{color:var(--red);}
+  .stat span{font-size:10.5px;color:var(--ink-soft);font-weight:500;line-height:1.3;display:block;}
+
+  .content{padding:16px 14px 0;}
+  .panel{background:var(--panel);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(0,0,0,0.07);margin-bottom:16px;}
+  .panel h2{margin:0 0 14px;font-size:16px;color:var(--steel-dark);display:flex;align-items:center;gap:8px;}
+  .panel h2::before{content:"";width:5px;height:16px;background:var(--steel);border-radius:2px;display:inline-block;}
+
+  label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin:12px 0 5px;}
+  label:first-of-type{margin-top:0;}
+  input,select,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:8px;font-family:'Sarabun',sans-serif;font-size:14.5px;background:#FBFEFB;color:var(--ink);}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--steel);outline-offset:0;border-color:var(--steel);}
+  textarea{resize:vertical;min-height:56px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .hint{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+
+  .items-row{display:grid;grid-template-columns:1fr 70px 70px 32px;gap:6px;margin-bottom:6px;align-items:center;}
+  .items-row input{padding:8px 9px;font-size:13.5px;}
+  .rm-item{background:var(--red-soft);color:var(--red);border:none;border-radius:6px;height:36px;cursor:pointer;font-size:16px;line-height:1;}
+  .add-item{margin-top:4px;background:none;border:1.5px dashed var(--line);color:var(--steel-dark);border-radius:8px;padding:8px;width:100%;font-size:13px;font-weight:600;cursor:pointer;font-family:'Sarabun',sans-serif;}
+  .add-item:hover{border-color:var(--steel);background:#EEF7F1;}
+
+  .btn{display:inline-block;width:100%;padding:12px;border:none;border-radius:9px;font-size:15px;font-weight:600;cursor:pointer;margin-top:16px;letter-spacing:.2px;}
+  .btn-primary{background:var(--steel-dark);color:#fff;}
+  .btn-primary:hover{background:#305A46;}
+  .btn-approve{background:var(--green);color:#fff;}
+  .btn-reject{background:var(--red);color:#fff;}
+  .btn-half{width:auto;flex:1;margin-top:0;padding:10px;font-size:13.5px;}
+  .btn-row{display:flex;gap:8px;margin-top:12px;}
+  .btn-save{background:var(--steel);color:#fff;margin-top:10px;padding:10px;font-size:13.5px;}
+
+  .ticket{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;margin-bottom:12px;border-left:5px solid var(--ink-soft);overflow:hidden;}
+  .ticket.pending{border-left-color:var(--yellow);}
+  .ticket.approved{border-left-color:var(--green);}
+  .ticket.rejected{border-left-color:var(--red);}
+  .ticket.delivered{border-left-color:var(--steel);}
+  .ticket-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .ticketno{font-size:11.5px;color:var(--ink-soft);font-weight:600;letter-spacing:.5px;}
+  .site{font-size:16px;font-weight:700;color:var(--ink);margin:2px 0 0;}
+  .jobtype{font-size:12.5px;color:var(--steel-dark);font-weight:600;background:#E7F3EC;display:inline-block;padding:2px 8px;border-radius:20px;margin-top:5px;}
+
+  .stamp{position:absolute;top:14px;right:14px;font-size:12px;font-weight:700;padding:5px 12px;border:2px dashed;border-radius:6px;transform:rotate(-7deg);letter-spacing:.5px;}
+  .stamp.pending{color:var(--yellow-dark);border-color:var(--yellow-dark);background:var(--yellow-soft);}
+  .stamp.approved{color:var(--green);border-color:var(--green);background:var(--green-soft);}
+  .stamp.rejected{color:var(--red);border-color:var(--red);background:var(--red-soft);}
+  .stamp.delivered{color:var(--steel-dark);border-color:var(--steel);background:#E7F3EE;}
+
+  .meta{margin-top:10px;font-size:13.5px;line-height:1.7;color:var(--ink);}
+  .meta .k{color:var(--ink-soft);font-weight:500;}
+  .items-list{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
+  .item-chip{background:#F0F6F1;border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12.5px;}
+
+  .deadline{font-weight:700;}
+  .deadline.ok{color:var(--green);}
+  .deadline.warn{color:var(--yellow-dark);}
+  .deadline.late{color:var(--red);}
+
+  .note-box{margin-top:8px;background:#F1F8F3;border-radius:8px;padding:8px 10px;font-size:13px;color:var(--ink-soft);}
+  .empty{text-align:center;color:var(--ink-soft);font-size:13.5px;padding:26px 10px;}
+  .subhead{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.6px;}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--steel-dark);color:#fff;padding:10px 20px;border-radius:30px;font-size:13.5px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;transition:.25s;pointer-events:none;z-index:150;}
+  .toast.show{opacity:1;}
+  .loading{text-align:center;padding:30px;color:var(--ink-soft);font-size:13.5px;}
+
+  .lock-wrap{padding:10px 0 30px;}
+  .lock-card{background:var(--panel);border-radius:var(--radius);padding:26px 22px;box-shadow:0 2px 10px rgba(0,0,0,0.08);max-width:340px;margin:20px auto;text-align:center;}
+  .lock-card .icon{font-size:30px;margin-bottom:6px;}
+  .lock-card h2{margin:0 0 4px;font-size:17px;color:var(--steel-dark);}
+  .lock-card p.d{font-size:12.5px;color:var(--ink-soft);margin:0 0 16px;}
+
+  .subnav{display:flex;gap:8px;margin-bottom:14px;}
+  .subnav button{flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--line);background:var(--panel);font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:'Sarabun',sans-serif;}
+  .subnav button.active{border-color:var(--steel);color:var(--steel-dark);background:var(--mint);}
+  .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .toprow .small-link{font-size:12px;color:var(--ink-soft);background:none;border:none;text-decoration:underline;cursor:pointer;font-family:'Sarabun',sans-serif;}
+
+  table.summary{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;}
+  table.summary th{text-align:left;font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.4px;padding:6px 4px;border-bottom:2px solid var(--line);}
+  table.summary td{padding:8px 4px;border-bottom:1px solid var(--line);}
+  table.summary td.amt{text-align:right;font-weight:700;color:var(--steel-dark);}
+  table.summary tfoot td{font-weight:700;border-bottom:none;padding-top:10px;}
+
+  .filterbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .filterbar button{padding:6px 12px;border-radius:20px;border:1.5px solid var(--line);background:var(--panel);font-size:12px;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:'Sarabun',sans-serif;}
+  .filterbar button.active{border-color:var(--steel);background:var(--mint);color:var(--steel-dark);}
+
+  .notify-banner{position:fixed;top:-140px;left:50%;transform:translateX(-50%);width:92%;max-width:480px;background:var(--yellow-soft);border:2px solid var(--yellow-dark);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:200;transition:top .35s ease;}
+  .notify-banner.show{top:14px;}
+  .notify-msg{font-size:13px;font-weight:700;color:var(--yellow-dark);line-height:1.4;}
+  .notify-actions{display:flex;gap:6px;flex-shrink:0;}
+  .notify-actions button{border:none;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Sarabun',sans-serif;}
+  #notifyViewBtn{background:var(--steel-dark);color:#fff;}
+  #notifyDismissBtn{background:rgba(0,0,0,0.07);color:var(--ink-soft);width:32px;padding:8px 0;font-size:16px;line-height:1;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <h1>ระบบสั่งวัสดุหน้างาน</h1>
+    <p class="sub">บันทึกล่วงหน้า 1 วัน • อนุมัติ • ติดตามวันโอนจ่าย</p>
+    <div class="sync-row">
+      <span class="sync-info" id="syncInfo">กำลังโหลดข้อมูล...</span>
+      <button class="refresh-btn" id="refreshBtn">รีเฟรชตอนนี้</button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="stats" id="stats"></div>
+  <div class="content" id="content"><div class="loading">กำลังโหลดข้อมูล...</div></div>
+</div>
+
+<div id="notifyBanner" class="notify-banner">
+  <div class="notify-msg" id="notifyMsg"></div>
+  <div class="notify-actions">
+    <button id="notifyViewBtn">ดูตอนนี้</button>
+    <button id="notifyDismissBtn">×</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const ORDERS_KEY = 'material-orders-data-v1';
+const PO_KEY = 'po-entries-v1';
+const PIN_KEY = 'purchase-pin-v1';
+const POLL_MS = 15000;
+
+let orders = [];
+let poEntries = [];
+let purchasePin = null;
+let purchaseUnlocked = false;
+let purchaseSubView = 'fulfill';
+let overviewFilter = 'all';
+let activeTab = 'request';
+let itemRowCount = 0;
+
+let knownOrderIds = new Set();
+let notifyQueueCount = 0;
+let lastSyncedAt = null;
+let pollTimer = null;
+let audioCtx = null;
+
+const TABS = [
+  {key:'request', label:'ส่งคำขอ'},
+  {key:'approve', label:'อนุมัติ'},
+  {key:'overview', label:'ภาพรวม'},
+  {key:'purchase', label:'จัดซื้อ'}
+];
+
+// ================= STORAGE =================
+async function loadKey(key, fallback){
+  try{
+    const res = await window.storage.get(key, true);
+    return res && res.value ? JSON.parse(res.value) : fallback;
+  }catch(e){ return fallback; }
+}
+async function loadPin(){
+  try{
+    const res = await window.storage.get(PIN_KEY, true);
+    return res && res.value ? res.value : null;
+  }catch(e){ return null; }
+}
+async function saveOrders(){ return saveKey(ORDERS_KEY, orders); }
+async function savePO(){ return saveKey(PO_KEY, poEntries); }
+async function saveKey(key, val){
+  try{ await window.storage.set(key, JSON.stringify(val), true); return true; }
+  catch(e){ showToast('บันทึกไม่สำเร็จ กรุณาลองใหม่'); return false; }
+}
+async function savePinValue(pin){
+  try{ await window.storage.set(PIN_KEY, pin, true); return true; }
+  catch(e){ showToast('บันทึกรหัสไม่สำเร็จ ลองใหม่อีกครั้ง'); return false; }
+}
+
+// refresh core data from shared storage — always call this right before
+// mutating+saving, so we never overwrite what someone else just added.
+async function refreshCore(){
+  const [freshOrders, freshPO, freshPin] = await Promise.all([
+    loadKey(ORDERS_KEY, orders),
+    loadKey(PO_KEY, poEntries),
+    loadPin()
+  ]);
+  const newPending = freshOrders.filter(o=>!knownOrderIds.has(o.id) && o.status==='pending');
+  orders = freshOrders;
+  poEntries = freshPO;
+  purchasePin = freshPin;
+  knownOrderIds = new Set(orders.map(o=>o.id));
+  lastSyncedAt = new Date();
+  if(newPending.length){
+    notifyQueueCount += newPending.length;
+    showNotifyBanner();
+    playBeep();
+    sendOsNotification(newPending.length);
+  }
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+function updateSyncInfo(){
+  const el = document.getElementById('syncInfo');
+  if(!el) return;
+  const t = lastSyncedAt ? lastSyncedAt.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) : '-';
+  el.textContent = 'ข้อมูลล่าสุด: '+t+' · ซิงค์ทุก 15 วิ';
+}
+
+// ================= NOTIFICATIONS (sound / banner / OS) =================
+function unlockAudioAndNotify(){
+  if(!audioCtx){
+    try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  }
+  if('Notification' in window && Notification.permission==='default'){
+    Notification.requestPermission().catch(()=>{});
+  }
+}
+document.addEventListener('click', unlockAudioAndNotify);
+document.addEventListener('touchstart', unlockAudioAndNotify);
+
+function beepTone(freq, delay){
+  setTimeout(()=>{
+    if(!audioCtx) return;
+    try{
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type='sine'; o.frequency.value=freq;
+      g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.3, audioCtx.currentTime+0.01);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+0.28);
+      o.stop(audioCtx.currentTime+0.3);
+    }catch(e){}
+  }, delay);
+}
+function playBeep(){
+  if(!audioCtx){ try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return; } }
+  beepTone(880, 0);
+  beepTone(1100, 190);
+}
+function sendOsNotification(n){
+  try{
+    if('Notification' in window && Notification.permission==='granted'){
+      new Notification('มีคำขอสั่งของใหม่เข้ามา', {body: n+' รายการ กรุณาตรวจสอบและอนุมัติ'});
+    }
+  }catch(e){}
+}
+function showNotifyBanner(){
+  document.getElementById('notifyMsg').textContent = '🔔 มีคำขอสั่งของใหม่เข้ามาในระบบ '+notifyQueueCount+' รายการ';
+  document.getElementById('notifyBanner').classList.add('show');
+}
+function hideNotifyBanner(){
+  document.getElementById('notifyBanner').classList.remove('show');
+}
+
+// ================= helpers =================
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function addDays(dateStr, days){
+  const d = new Date(dateStr+'T00:00:00');
+  d.setDate(d.getDate()+days);
+  return d.toISOString().slice(0,10);
+}
+function dayDiff(dateStr){
+  const d = new Date(dateStr+'T00:00:00');
+  const t = new Date(todayStr()+'T00:00:00');
+  return Math.round((d - t)/86400000);
+}
+function fmtDateShort(dateStr){
+  if(!dateStr) return '-';
+  const d = new Date(dateStr+'T00:00:00');
+  const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  return d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+}
+function paymentDeadline(order){ return addDays(order.neededDate, -Number(order.leadTimeDays||0)); }
+function ticketNo(order){
+  const d = new Date(order.createdAt);
+  const ym = String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0');
+  return 'WO-'+ym+'-'+String(order.seq).padStart(3,'0');
+}
+function statusClass(order){
+  if(order.status==='pending') return 'pending';
+  if(order.status==='rejected') return 'rejected';
+  if(order.status==='approved' && order.purchaseStatus==='ของเข้าแล้ว') return 'delivered';
+  return 'approved';
+}
+function statusLabel(order){
+  if(order.status==='pending') return 'รออนุมัติ';
+  if(order.status==='rejected') return 'ไม่อนุมัติ';
+  if(order.status==='approved' && order.purchaseStatus==='ของเข้าแล้ว') return 'ของเข้าแล้ว';
+  if(order.status==='approved') return 'อนุมัติแล้ว';
+  return order.status;
+}
+function isUrgent(order){
+  if(order.status!=='approved' || order.purchaseStatus==='ของเข้าแล้ว') return false;
+  if(order.actualPaymentDate) return false;
+  return dayDiff(paymentDeadline(order)) <= 1;
+}
+function escapeHtml(s){
+  return (s||'').toString().replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function fmtMoney(n){
+  return Number(n||0).toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+// ================= SHELL: tabs + stats (always safe to redraw) =================
+function tabsHtml(){
+  const pendingCount = orders.filter(o=>o.status==='pending').length;
+  const purchaseCount = orders.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว').length;
+  return TABS.map(t=>{
+    let label = t.label;
+    if(t.key==='approve' && pendingCount) label += ` <span class="badge-count">${pendingCount}</span>`;
+    if(t.key==='purchase'){
+      if(!purchaseUnlocked) label += ' 🔒';
+      if(purchaseCount) label += ` <span class="badge-count">${purchaseCount}</span>`;
+    }
+    return `<button class="tabbtn ${t.key===activeTab?'active':''}" data-tab="${t.key}">${label}</button>`;
+  }).join('');
+}
+function statsHtml(){
+  const pending = orders.filter(o=>o.status==='pending').length;
+  const approvedWaiting = orders.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว').length;
+  const urgent = orders.filter(isUrgent).length;
+  const delivered = orders.filter(o=>o.purchaseStatus==='ของเข้าแล้ว').length;
+  return `
+    <div class="stat"><b>${pending}</b><span>รอนายอนุมัติ</span></div>
+    <div class="stat"><b>${approvedWaiting}</b><span>รอสั่ง/โอนจ่าย</span></div>
+    <div class="stat urgent"><b>${urgent}</b><span>ใกล้/เกินกำหนด</span></div>
+    <div class="stat"><b>${delivered}</b><span>ของเข้าแล้ว</span></div>
+  `;
+}
+function renderTabsAndStats(){
+  document.getElementById('tabs').innerHTML = tabsHtml();
+  document.getElementById('stats').innerHTML = statsHtml();
+  document.querySelectorAll('.tabbtn').forEach(b=>{ b.onclick = ()=>switchTab(b.dataset.tab); });
+}
+
+// ================= tab switching =================
+async function switchTab(key){
+  activeTab = key;
+  renderTabsAndStats();
+  document.getElementById('content').innerHTML = '<div class="loading">กำลังโหลดข้อมูล...</div>';
+  await refreshCore();
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+function renderContentOnly(){
+  const content = document.getElementById('content');
+  if(activeTab==='request') content.innerHTML = viewRequest();
+  else if(activeTab==='approve') content.innerHTML = viewApprove();
+  else if(activeTab==='overview') content.innerHTML = viewOverview();
+  else if(activeTab==='purchase') content.innerHTML = viewPurchaseGate();
+  bindContentEvents();
+}
+
+// ================= ticket rendering =================
+function itemsChips(order){
+  if(!order.items || !order.items.length) return '';
+  return '<div class="items-list">'+order.items.map(it=>
+    `<span class="item-chip">${escapeHtml(it.name)} ${it.qty?('· '+escapeHtml(it.qty)+' '+escapeHtml(it.unit||'')):''}</span>`
+  ).join('')+'</div>';
+}
+function ticketCard(order, extraBody){
+  const dl = paymentDeadline(order);
+  const diff = dayDiff(dl);
+  let dlClass = 'ok';
+  if(diff<0) dlClass='late'; else if(diff<=1) dlClass='warn';
+  return `
+  <div class="ticket ${statusClass(order)}">
+    <div class="stamp ${statusClass(order)}">${statusLabel(order)}</div>
+    <div class="ticket-top">
+      <div>
+        <div class="ticketno">${ticketNo(order)}</div>
+        <div class="site">${escapeHtml(order.site)}</div>
+        <div class="jobtype">${escapeHtml(order.jobType)}</div>
+      </div>
+    </div>
+    ${itemsChips(order)}
+    <div class="meta">
+      <div><span class="k">ผู้บันทึก:</span> ${escapeHtml(order.requester)} (${escapeHtml(order.requesterRole)})</div>
+      <div><span class="k">ต้องการของเข้า:</span> ${fmtDateShort(order.neededDate)}</div>
+      <div><span class="k">สั่งจองล่วงหน้าหลังจ่าย:</span> ${order.leadTimeDays} วัน</div>
+      <div><span class="k">ครบกำหนดโอนจ่ายภายใน:</span> <span class="deadline ${dlClass}">${fmtDateShort(dl)}${diff<0?' (เกินกำหนด)':(diff<=1?' (เร่งด่วน)':'')}</span></div>
+      ${order.approvedBy ? `<div><span class="k">อนุมัติโดย:</span> ${escapeHtml(order.approvedBy)}</div>`:''}
+      ${order.actualPaymentDate ? `<div><span class="k">โอนจ่ายจริง:</span> ${fmtDateShort(order.actualPaymentDate)}</div>`:''}
+      ${order.purchaseStatus ? `<div><span class="k">สถานะจัดซื้อ:</span> ${escapeHtml(order.purchaseStatus)}</div>`:''}
+      ${order.purchasedBy ? `<div><span class="k">ดูแลจัดซื้อโดย:</span> ${escapeHtml(order.purchasedBy)}</div>`:''}
+    </div>
+    ${order.note ? `<div class="note-box"><span class="k">หมายเหตุจากหน้างาน:</span> ${escapeHtml(order.note)}</div>`:''}
+    ${order.approverNote ? `<div class="note-box"><span class="k">หมายเหตุจากผู้อนุมัติ:</span> ${escapeHtml(order.approverNote)}</div>`:''}
+    ${extraBody||''}
+  </div>`;
+}
+
+// ---------- request tab ----------
+function recentListHtml(){
+  const recent = [...orders].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,20);
+  return recent.length ? recent.map(o=>ticketCard(o)).join('') : '<div class="empty">ยังไม่มีคำขอ — เริ่มบันทึกรายการแรกได้เลย</div>';
+}
+function viewRequest(){
+  return `
+  <div class="panel">
+    <h2>บันทึกคำขอสั่งของ</h2>
+    <label>ชื่อผู้บันทึก</label>
+    <input id="f_requester" placeholder="เช่น สมชาย ใจดี">
+    <div class="row2">
+      <div>
+        <label>บทบาท</label>
+        <select id="f_role">
+          <option>ช่าง</option>
+          <option>โฟร์แมน</option>
+        </select>
+      </div>
+      <div>
+        <label>หน้างาน / โครงการ</label>
+        <input id="f_site" placeholder="เช่น โครงการบ้านคุณเอ - บางนา">
+      </div>
+    </div>
+    <label>ประเภทงาน</label>
+    <input id="f_jobtype" placeholder="เช่น งานโครงสร้าง, งานปูกระเบื้อง, งานไฟฟ้า">
+
+    <label>รายการวัสดุที่ต้องสั่ง</label>
+    <div id="itemRows"></div>
+    <button type="button" class="add-item" id="addItemBtn">+ เพิ่มรายการวัสดุ</button>
+
+    <div class="row2">
+      <div>
+        <label>วันที่ต้องการให้ของเข้า</label>
+        <input type="date" id="f_needed">
+      </div>
+      <div>
+        <label>สั่งจองล่วงหน้ากี่วันหลังจ่ายเงิน</label>
+        <input type="number" id="f_leadtime" min="0" value="1">
+      </div>
+    </div>
+    <p class="hint">ระบบจะคำนวณ "วันครบกำหนดโอนจ่าย" ให้อัตโนมัติ = วันที่ต้องการของ − จำนวนวันสั่งจอง</p>
+
+    <label>หมายเหตุ (ถ้ามี)</label>
+    <textarea id="f_note" placeholder="รายละเอียดเพิ่มเติม, ยี่ห้อ, ร้านค้าที่แนะนำ ฯลฯ"></textarea>
+
+    <button class="btn btn-primary" id="submitBtn">ส่งคำขอสั่งของ</button>
+  </div>
+
+  <div class="subhead">คำขอล่าสุด (<span id="reqCount">${orders.length}</span> รายการทั้งหมด)</div>
+  <div id="recentList">${recentListHtml()}</div>
+  `;
+}
+function updateRecentListOnly(){
+  const el = document.getElementById('recentList');
+  if(el) el.innerHTML = recentListHtml();
+  const c = document.getElementById('reqCount');
+  if(c) c.textContent = orders.length;
+}
+function addItemRow(prefill){
+  itemRowCount++;
+  const id = 'item_'+itemRowCount;
+  const wrap = document.getElementById('itemRows');
+  const div = document.createElement('div');
+  div.className = 'items-row';
+  div.id = id;
+  div.innerHTML = `
+    <input placeholder="ชื่อวัสดุ" class="it-name" value="${prefill&&prefill.name?escapeHtml(prefill.name):''}">
+    <input placeholder="จำนวน" class="it-qty" value="${prefill&&prefill.qty?escapeHtml(prefill.qty):''}">
+    <input placeholder="หน่วย" class="it-unit" value="${prefill&&prefill.unit?escapeHtml(prefill.unit):''}">
+    <button type="button" class="rm-item" onclick="document.getElementById('${id}').remove()">×</button>
+  `;
+  wrap.appendChild(div);
+}
+
+// ---------- approve tab ----------
+function viewApprove(){
+  const pending = orders.filter(o=>o.status==='pending').sort((a,b)=>new Date(a.neededDate)-new Date(b.neededDate));
+  const decided = orders.filter(o=>o.status!=='pending').sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,15);
+  return `
+  <div class="subhead">รอนายอนุมัติ (${pending.length})</div>
+  ${pending.length ? pending.map(o=>ticketCard(o, approveActions(o))).join('') : '<div class="empty">ไม่มีคำขอที่รออนุมัติ</div>'}
+  <div class="subhead">ประวัติการอนุมัติล่าสุด</div>
+  ${decided.length ? decided.map(o=>ticketCard(o)).join('') : '<div class="empty">ยังไม่มีประวัติ</div>'}
+  `;
+}
+function approveActions(order){
+  return `
+    <label>ชื่อผู้อนุมัติ</label>
+    <input class="approver-name" data-id="${order.id}" placeholder="ชื่อเจ้านาย/ผู้มีสิทธิ์อนุมัติ">
+    <label>หมายเหตุจากผู้อนุมัติ (ถ้ามี)</label>
+    <textarea class="approver-note" data-id="${order.id}" placeholder="เช่น อนุมัติแบบลดจำนวน, ให้เปลี่ยนร้าน ฯลฯ"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-approve btn-half act-approve" data-id="${order.id}">อนุมัติ</button>
+      <button class="btn btn-reject btn-half act-reject" data-id="${order.id}">ไม่อนุมัติ</button>
+    </div>
+  `;
+}
+
+// ---------- overview tab ----------
+function siteCostSummaryHtml(){
+  const bySite = {};
+  poEntries.forEach(p=>{ bySite[p.site] = (bySite[p.site]||0) + Number(p.amount||0); });
+  const siteRows = Object.entries(bySite).sort((a,b)=>b[1]-a[1]);
+  const grandTotal = siteRows.reduce((s,r)=>s+r[1],0);
+  if(!siteRows.length) return '<div class="empty">ยังไม่มีข้อมูล PO</div>';
+  return `
+    <table class="summary">
+      <thead><tr><th>หน้างาน</th><th style="text-align:right">รวมค่าใช้จ่าย (บาท)</th></tr></thead>
+      <tbody>${siteRows.map(([site,total])=>`<tr><td>${escapeHtml(site)}</td><td class="amt">${fmtMoney(total)}</td></tr>`).join('')}</tbody>
+      <tfoot><tr><td>รวมทั้งหมด</td><td class="amt">${fmtMoney(grandTotal)}</td></tr></tfoot>
+    </table>`;
+}
+function viewOverview(){
+  const filters = [
+    {key:'all', label:'ทั้งหมด'},
+    {key:'pending', label:'รออนุมัติ'},
+    {key:'approved', label:'อนุมัติแล้ว/รอจัดซื้อ'},
+    {key:'delivered', label:'ของเข้าแล้ว'},
+    {key:'rejected', label:'ไม่อนุมัติ'}
+  ];
+  let list = [...orders];
+  if(overviewFilter==='pending') list = list.filter(o=>o.status==='pending');
+  else if(overviewFilter==='approved') list = list.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว');
+  else if(overviewFilter==='delivered') list = list.filter(o=>o.purchaseStatus==='ของเข้าแล้ว');
+  else if(overviewFilter==='rejected') list = list.filter(o=>o.status==='rejected');
+  list.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+
+  return `
+  <div class="panel">
+    <h2>สรุปค่าใช้จ่ายแต่ละหน้างาน</h2>
+    ${siteCostSummaryHtml()}
+  </div>
+  <div class="subhead">คำขอทั้งหมด (${orders.length})</div>
+  <div class="filterbar">
+    ${filters.map(f=>`<button class="ov-filter ${overviewFilter===f.key?'active':''}" data-f="${f.key}">${f.label}</button>`).join('')}
+  </div>
+  ${list.length ? list.slice(0,40).map(o=>ticketCard(o)).join('') : '<div class="empty">ไม่มีรายการในหมวดนี้</div>'}
+  `;
+}
+
+// ---------- purchase tab (PIN-gated) ----------
+function poTicketNo(){
+  const seq = poEntries.length + 1;
+  const d = new Date();
+  const ym = String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0');
+  return 'PO-'+ym+'-'+String(seq).padStart(3,'0');
+}
+function viewPurchaseGate(){
+  if(purchasePin === null){
+    return `
+    <div class="lock-wrap">
+      <div class="lock-card">
+        <div class="icon">🔐</div>
+        <h2>ตั้งรหัสผ่านสำหรับฝ่ายจัดซื้อ</h2>
+        <p class="d">ยังไม่มีการตั้งรหัส กรุณาตั้งรหัสผ่าน 4-6 ตัว เพื่อป้องกันหน้านี้ (เฉพาะฝ่ายจัดซื้อเท่านั้นที่ควรรู้รหัสนี้)</p>
+        <input id="setup_pin" type="password" inputmode="numeric" maxlength="6" placeholder="ตั้งรหัสผ่าน">
+        <button class="btn btn-primary" id="setupPinBtn">ตั้งรหัสผ่าน</button>
+      </div>
+    </div>`;
+  }
+  if(!purchaseUnlocked){
+    return `
+    <div class="lock-wrap">
+      <div class="lock-card">
+        <div class="icon">🔒</div>
+        <h2>หน้าจัดซื้อ (ต้องใส่รหัส)</h2>
+        <p class="d">ช่างและโฟร์แมนไม่จำเป็นต้องเข้าหน้านี้ — ใช้สำหรับฝ่ายจัดซื้อเท่านั้น</p>
+        <input id="enter_pin" type="password" inputmode="numeric" maxlength="6" placeholder="กรอกรหัสผ่าน">
+        <button class="btn btn-primary" id="unlockBtn">เข้าสู่หน้าจัดซื้อ</button>
+      </div>
+    </div>`;
+  }
+  return viewPurchaseContent();
+}
+function viewPurchaseContent(){
+  return `
+  <div class="toprow">
+    <span class="hint">ปลดล็อกแล้วสำหรับเซสชันนี้</span>
+    <div style="display:flex;gap:10px;">
+      <button class="small-link" id="changePinBtn">เปลี่ยนรหัส</button>
+      <button class="small-link" id="lockBtn">ล็อกหน้านี้</button>
+    </div>
+  </div>
+  <div class="subnav">
+    <button class="sub-nav-btn ${purchaseSubView==='fulfill'?'active':''}" data-v="fulfill">ดำเนินการจัดซื้อ</button>
+    <button class="sub-nav-btn ${purchaseSubView==='po'?'active':''}" data-v="po">PO / ค่าใช้จ่าย</button>
+  </div>
+  ${purchaseSubView==='fulfill' ? viewFulfill() : viewPO()}
+  `;
+}
+function viewFulfill(){
+  const active = orders.filter(o=>o.status==='approved' && o.purchaseStatus!=='ของเข้าแล้ว')
+    .sort((a,b)=>new Date(paymentDeadline(a))-new Date(paymentDeadline(b)));
+  const done = orders.filter(o=>o.purchaseStatus==='ของเข้าแล้ว' || o.status==='rejected')
+    .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,15);
+  return `
+  <div class="subhead">รอดำเนินการจัดซื้อ / โอนจ่าย (${active.length})</div>
+  ${active.length ? active.map(o=>ticketCard(o, purchaseActions(o))).join('') : '<div class="empty">ไม่มีรายการที่ต้องดำเนินการ</div>'}
+  <div class="subhead">ประวัติ (ของเข้าแล้ว / ไม่อนุมัติ)</div>
+  ${done.length ? done.map(o=>ticketCard(o)).join('') : '<div class="empty">ยังไม่มีประวัติ</div>'}
+  `;
+}
+function purchaseActions(order){
+  return `
+    <label>ชื่อผู้ดำเนินการจัดซื้อ</label>
+    <input class="pur-staff" data-id="${order.id}" placeholder="ชื่อเจ้าหน้าที่จัดซื้อ" value="${escapeHtml(order.purchasedBy||'')}">
+    <div class="row2">
+      <div>
+        <label>วันที่โอนจ่ายจริง</label>
+        <input type="date" class="pay-date" data-id="${order.id}" value="${order.actualPaymentDate||''}">
+      </div>
+      <div>
+        <label>สถานะการสั่งซื้อ</label>
+        <select class="pur-status" data-id="${order.id}">
+          <option value="รอดำเนินการ" ${order.purchaseStatus==='รอดำเนินการ'?'selected':''}>รอดำเนินการ</option>
+          <option value="สั่งซื้อแล้ว" ${order.purchaseStatus==='สั่งซื้อแล้ว'?'selected':''}>สั่งซื้อแล้ว</option>
+          <option value="ของเข้าแล้ว" ${order.purchaseStatus==='ของเข้าแล้ว'?'selected':''}>ของเข้าแล้ว</option>
+        </select>
+      </div>
+    </div>
+    <label>หมายเหตุจัดซื้อ</label>
+    <textarea class="pur-note" data-id="${order.id}" placeholder="ชื่อร้าน, เลขที่ใบสั่งซื้อ ฯลฯ">${escapeHtml(order.purchaseNote||'')}</textarea>
+    <button class="btn btn-save act-savepurchase" data-id="${order.id}">บันทึก</button>
+  `;
+}
+function viewPO(){
+  const sites = [...new Set(orders.map(o=>o.site).filter(Boolean))];
+  const approvedOrders = orders.filter(o=>o.status==='approved');
+  const recentPO = [...poEntries].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  return `
+  <div class="panel">
+    <h2>บันทึก PO / ใบสั่งซื้อ</h2>
+    <label>เลขที่ PO</label>
+    <input id="po_no" value="${poTicketNo()}" disabled>
+    <label>ชื่อผู้บันทึก (จัดซื้อ)</label>
+    <input id="po_staff" placeholder="ชื่อเจ้าหน้าที่จัดซื้อ">
+    <div class="row2">
+      <div>
+        <label>หน้างาน</label>
+        <input id="po_site" list="site_list" placeholder="เลือกหรือพิมพ์หน้างาน">
+        <datalist id="site_list">${sites.map(s=>`<option value="${escapeHtml(s)}">`).join('')}</datalist>
+      </div>
+      <div>
+        <label>ผู้ขาย / ร้านค้า</label>
+        <input id="po_vendor" placeholder="ชื่อร้านค้า/ผู้ขาย">
+      </div>
+    </div>
+    <div class="row2">
+      <div>
+        <label>จำนวนเงิน (บาท)</label>
+        <input id="po_amount" type="number" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div>
+        <label>วันที่ลง PO</label>
+        <input id="po_date" type="date">
+      </div>
+    </div>
+    <label>อ้างอิงคำขอ (ถ้ามี)</label>
+    <select id="po_order">
+      <option value="">— ไม่เชื่อมกับคำขอ —</option>
+      ${approvedOrders.map(o=>`<option value="${o.id}">${ticketNo(o)} · ${escapeHtml(o.site)}</option>`).join('')}
+    </select>
+    <label>หมายเหตุ</label>
+    <textarea id="po_note" placeholder="รายละเอียดเพิ่มเติม"></textarea>
+    <button class="btn btn-primary" id="poSubmitBtn">บันทึก PO</button>
+  </div>
+
+  <div class="panel">
+    <h2>สรุปค่าใช้จ่ายแต่ละหน้างาน</h2>
+    ${siteCostSummaryHtml()}
+  </div>
+
+  <div class="subhead">รายการ PO ล่าสุด</div>
+  ${recentPO.length ? recentPO.slice(0,20).map(p=>poCard(p)).join('') : '<div class="empty">ยังไม่มีรายการ PO</div>'}
+  `;
+}
+function poCard(p){
+  return `
+  <div class="ticket approved">
+    <div class="ticket-top">
+      <div>
+        <div class="ticketno">${escapeHtml(p.poNumber)}</div>
+        <div class="site">${escapeHtml(p.site)}</div>
+        <div class="jobtype">${escapeHtml(p.vendor||'-')}</div>
+      </div>
+      <div class="stamp approved" style="position:static;transform:rotate(0);">฿ ${fmtMoney(p.amount)}</div>
+    </div>
+    <div class="meta">
+      <div><span class="k">วันที่ลง PO:</span> ${fmtDateShort(p.poDate)}</div>
+      <div><span class="k">บันทึกโดย:</span> ${escapeHtml(p.createdBy)}</div>
+      ${p.orderId ? `<div><span class="k">อ้างอิงคำขอ:</span> ${escapeHtml(p.orderTicketLabel||'')}</div>`:''}
+    </div>
+    ${p.note ? `<div class="note-box">${escapeHtml(p.note)}</div>`:''}
+  </div>`;
+}
+
+// ================= content-level event binding =================
+function bindContentEvents(){
+  if(activeTab==='request'){
+    document.getElementById('itemRows').innerHTML='';
+    itemRowCount=0;
+    addItemRow(); addItemRow();
+    const dEl = document.getElementById('f_needed');
+    dEl.value = addDays(todayStr(),1);
+    dEl.min = todayStr();
+    document.getElementById('addItemBtn').onclick = ()=>addItemRow();
+    document.getElementById('submitBtn').onclick = submitRequest;
+  }
+  else if(activeTab==='approve'){
+    document.querySelectorAll('.act-approve').forEach(b=>b.onclick=()=>decide(b.dataset.id,'approved'));
+    document.querySelectorAll('.act-reject').forEach(b=>b.onclick=()=>decide(b.dataset.id,'rejected'));
+  }
+  else if(activeTab==='overview'){
+    document.querySelectorAll('.ov-filter').forEach(b=>b.onclick=()=>{ overviewFilter=b.dataset.f; renderContentOnly(); });
+  }
+  else if(activeTab==='purchase'){
+    if(purchasePin === null){
+      const btn = document.getElementById('setupPinBtn');
+      if(btn) btn.onclick = setupPin;
+    } else if(!purchaseUnlocked){
+      const btn = document.getElementById('unlockBtn');
+      if(btn) btn.onclick = unlockPurchase;
+    } else {
+      document.getElementById('lockBtn').onclick = ()=>{ purchaseUnlocked=false; renderTabsAndStats(); renderContentOnly(); };
+      document.getElementById('changePinBtn').onclick = changePin;
+      document.querySelectorAll('.sub-nav-btn').forEach(b=>b.onclick=()=>{ purchaseSubView=b.dataset.v; renderContentOnly(); });
+      if(purchaseSubView==='fulfill'){
+        document.querySelectorAll('.act-savepurchase').forEach(b=>b.onclick=()=>savePurchase(b.dataset.id));
+      } else {
+        document.getElementById('po_date').value = todayStr();
+        document.getElementById('poSubmitBtn').onclick = submitPO;
+      }
+    }
+  }
+}
+
+// ================= mutating actions (always refresh-then-save) =================
+async function submitRequest(){
+  const requester = document.getElementById('f_requester').value.trim();
+  const site = document.getElementById('f_site').value.trim();
+  const jobType = document.getElementById('f_jobtype').value.trim();
+  const needed = document.getElementById('f_needed').value;
+  const leadTimeDays = document.getElementById('f_leadtime').value || 0;
+  const note = document.getElementById('f_note').value.trim();
+  const role = document.getElementById('f_role').value;
+
+  if(!requester || !site || !jobType || !needed){
+    showToast('กรุณากรอกชื่อผู้บันทึก, หน้างาน, ประเภทงาน และวันที่ต้องการของ');
+    return;
+  }
+  const items = [];
+  document.querySelectorAll('#itemRows .items-row').forEach(row=>{
+    const name = row.querySelector('.it-name').value.trim();
+    const qty = row.querySelector('.it-qty').value.trim();
+    const unit = row.querySelector('.it-unit').value.trim();
+    if(name) items.push({name, qty, unit});
+  });
+  if(!items.length){
+    showToast('กรุณาระบุรายการวัสดุอย่างน้อย 1 รายการ');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'กำลังบันทึก...';
+
+  // refresh first so we build on the latest shared data, not a stale local copy
+  orders = await loadKey(ORDERS_KEY, orders);
+  const seq = orders.length + 1;
+  const order = {
+    id: 'o_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    seq,
+    createdAt: new Date().toISOString(),
+    requester, requesterRole: role, site, jobType, items,
+    neededDate: needed,
+    leadTimeDays: Number(leadTimeDays),
+    note,
+    status: 'pending',
+    approverNote: '', approvedBy: '', approvedAt: null,
+    actualPaymentDate: null, purchaseStatus: 'รอดำเนินการ', purchaseNote: '', purchasedBy: ''
+  };
+  orders.push(order);
+  const ok = await saveOrders();
+  knownOrderIds.add(order.id);
+  lastSyncedAt = new Date();
+
+  if(ok) showToast('ส่งคำขอสั่งของแล้ว รอเจ้านายอนุมัติ');
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+async function decide(id, status){
+  const nameEl = document.querySelector(`.approver-name[data-id="${id}"]`);
+  const noteEl = document.querySelector(`.approver-note[data-id="${id}"]`);
+  const approverName = nameEl ? nameEl.value.trim() : '';
+  if(!approverName){ showToast('กรุณากรอกชื่อผู้อนุมัติ'); return; }
+  const approverNote = noteEl ? noteEl.value.trim() : '';
+
+  orders = await loadKey(ORDERS_KEY, orders);
+  const order = orders.find(o=>o.id===id);
+  if(!order){
+    showToast('ไม่พบคำขอนี้แล้ว (อาจถูกดำเนินการไปแล้ว) — รีเฟรชข้อมูลใหม่');
+    renderTabsAndStats(); renderContentOnly();
+    return;
+  }
+  order.approverNote = approverNote;
+  order.status = status;
+  order.approvedBy = approverName;
+  order.approvedAt = new Date().toISOString();
+  const ok = await saveOrders();
+  lastSyncedAt = new Date();
+
+  if(ok) showToast(status==='approved' ? 'อนุมัติคำขอแล้ว' : 'ไม่อนุมัติคำขอแล้ว');
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+async function savePurchase(id){
+  const staff = document.querySelector(`.pur-staff[data-id="${id}"]`).value.trim();
+  const payDate = document.querySelector(`.pay-date[data-id="${id}"]`).value;
+  const status = document.querySelector(`.pur-status[data-id="${id}"]`).value;
+  const note = document.querySelector(`.pur-note[data-id="${id}"]`).value.trim();
+
+  orders = await loadKey(ORDERS_KEY, orders);
+  const order = orders.find(o=>o.id===id);
+  if(!order){
+    showToast('ไม่พบคำขอนี้แล้ว — รีเฟรชข้อมูลใหม่');
+    renderTabsAndStats(); renderContentOnly();
+    return;
+  }
+  order.actualPaymentDate = payDate || null;
+  order.purchaseStatus = status;
+  order.purchaseNote = note;
+  order.purchasedBy = staff;
+  const ok = await saveOrders();
+  lastSyncedAt = new Date();
+
+  if(ok) showToast('บันทึกข้อมูลจัดซื้อแล้ว');
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+async function submitPO(){
+  const staff = document.getElementById('po_staff').value.trim();
+  const site = document.getElementById('po_site').value.trim();
+  const vendor = document.getElementById('po_vendor').value.trim();
+  const amount = document.getElementById('po_amount').value;
+  const poDate = document.getElementById('po_date').value;
+  const orderId = document.getElementById('po_order').value;
+  const note = document.getElementById('po_note').value.trim();
+
+  if(!staff || !site || !amount || !poDate){
+    showToast('กรุณากรอกชื่อผู้บันทึก, หน้างาน, จำนวนเงิน และวันที่ลง PO');
+    return;
+  }
+  let orderTicketLabel = '';
+  if(orderId){
+    const o = orders.find(x=>x.id===orderId);
+    if(o) orderTicketLabel = ticketNo(o)+' · '+o.site;
+  }
+
+  poEntries = await loadKey(PO_KEY, poEntries);
+  const entry = {
+    id: 'po_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    poNumber: poTicketNo(),
+    site, vendor, amount: Number(amount), poDate, orderId, orderTicketLabel, note,
+    createdBy: staff,
+    createdAt: new Date().toISOString()
+  };
+  poEntries.push(entry);
+  const ok = await savePO();
+  lastSyncedAt = new Date();
+
+  if(ok) showToast('บันทึก PO แล้ว');
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+}
+
+async function setupPin(){
+  const pin = document.getElementById('setup_pin').value.trim();
+  if(pin.length<4){ showToast('รหัสต้องมีอย่างน้อย 4 ตัว'); return; }
+  const existing = await loadPin();
+  if(existing){
+    purchasePin = existing;
+    showToast('มีการตั้งรหัสไว้แล้วโดยผู้อื่น กรุณาขอรหัสจากฝ่ายจัดซื้อ');
+    renderContentOnly();
+    return;
+  }
+  purchasePin = pin;
+  purchaseUnlocked = true;
+  await savePinValue(pin);
+  showToast('ตั้งรหัสผ่านเรียบร้อย');
+  renderTabsAndStats();
+  renderContentOnly();
+}
+async function unlockPurchase(){
+  const pin = document.getElementById('enter_pin').value.trim();
+  const fresh = await loadPin();
+  if(fresh) purchasePin = fresh;
+  if(pin !== purchasePin){ showToast('รหัสผ่านไม่ถูกต้อง'); return; }
+  purchaseUnlocked = true;
+  renderTabsAndStats();
+  renderContentOnly();
+}
+async function changePin(){
+  const cur = prompt('กรอกรหัสผ่านปัจจุบัน เพื่อยืนยันตัวตน');
+  if(cur === null) return;
+  const fresh = await loadPin();
+  if(fresh) purchasePin = fresh;
+  if(cur.trim() !== purchasePin){ showToast('รหัสผ่านปัจจุบันไม่ถูกต้อง'); return; }
+  const next = prompt('กำหนดรหัสผ่านใหม่ (4-6 ตัว)');
+  if(next === null) return;
+  if(next.trim().length<4){ showToast('รหัสต้องมีอย่างน้อย 4 ตัว'); return; }
+  purchasePin = next.trim();
+  await savePinValue(purchasePin);
+  showToast('เปลี่ยนรหัสผ่านแล้ว');
+}
+
+// ================= background sync polling =================
+async function pollTick(){
+  await refreshCore();
+  renderTabsAndStats();
+  updateSyncInfo();
+  if(activeTab==='overview'){
+    renderContentOnly();
+  } else if(activeTab==='request'){
+    updateRecentListOnly();
+  }
+  // 'approve' and 'purchase' content is left untouched during background polls
+  // so in-progress notes/inputs are never wiped — the badge + banner + sound
+  // already make new arrivals obvious, and switching tabs shows fresh data.
+}
+function startPolling(){
+  if(pollTimer) return;
+  pollTimer = setInterval(pollTick, POLL_MS);
+}
+function stopPolling(){
+  if(pollTimer){ clearInterval(pollTimer); pollTimer=null; }
+}
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden) stopPolling();
+  else { pollTick(); startPolling(); }
+});
+
+async function manualRefresh(){
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true;
+  await refreshCore();
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+  btn.disabled = false;
+  showToast('รีเฟรชข้อมูลล่าสุดแล้ว');
+}
+
+// ================= init =================
+(async function init(){
+  orders = await loadKey(ORDERS_KEY, []);
+  poEntries = await loadKey(PO_KEY, []);
+  purchasePin = await loadPin();
+  knownOrderIds = new Set(orders.map(o=>o.id));
+  lastSyncedAt = new Date();
+
+  renderTabsAndStats();
+  renderContentOnly();
+  updateSyncInfo();
+  startPolling();
+
+  document.getElementById('refreshBtn').onclick = manualRefresh;
+  document.getElementById('notifyViewBtn').onclick = ()=>{ hideNotifyBanner(); notifyQueueCount=0; switchTab('approve'); };
+  document.getElementById('notifyDismissBtn').onclick = ()=>{ hideNotifyBanner(); notifyQueueCount=0; };
+})();
+</script>
+</body>
+</html>
